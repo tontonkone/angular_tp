@@ -1,0 +1,44 @@
+<h1>Liste d'utilisateurs</h1>
+
+<router-outlet></router-outlet>
+
+<form (ngSubmit)="createOrUpdateUser()">
+  <input
+    type="text"
+    name="lastname"
+    autocomplete="off"
+    [(ngModel)]="user.lastname"
+    placeholder="Nom de famille">
+  <input
+    type="text"
+    name="firstname"
+    autocomplete="off"
+    [(ngModel)]="user.firstname"
+    placeholder="Prénom">
+  <input
+    type="email"
+    name="email"
+    autocomplete="off"
+    [(ngModel)]="user.email"
+    placeholder="Email">
+  <button type="submit">Go!</button>
+  <button (click)="reInitUser()" type="reset">Effacer</button>
+</form>
+
+<div
+  class="users"
+  *ngFor="let u of users">
+
+  <div (click)="selected = u"> {{ u.firstname }}</div>
+
+  <button (click)="delete(u.id)">✖︎</button>
+  <button (click)="user = u">✎</button>
+
+</div>
+
+<div *ngIf="selected">
+  <h3>Détails sur {{ selected.firstname }}.</h3>
+  <p><strong>Nom de famille:</strong>{{ selected.lastname }}</p>
+  <p><strong>Prénom:</strong>{{ selected.firstname }}</p>
+  <p><strong>Email:</strong>{{ selected.email }}</p>
+</div>
