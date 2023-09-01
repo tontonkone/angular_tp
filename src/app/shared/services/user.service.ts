@@ -15,7 +15,7 @@ export class UserService {
     return this._http.get<User[]>(this._baseUrl);
   }
 
-  public findById(id: string) {
+  public findById(id: string ) {
     return this._http.get(`${this._baseUrl}/${id}`);
   }
 

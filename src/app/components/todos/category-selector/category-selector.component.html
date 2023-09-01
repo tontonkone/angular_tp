@@ -1,0 +1,6 @@
+<div class="category-selector">
+    <h2>Sélectionnez une catégorie</h2>
+    <select aria-label="categorie" (change)="onSelectCategory($event)">
+        <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+    </select>
+</div>

@@ -1,63 +1,51 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Todo } from 'src/app/shared/models/todo';
-import { User } from 'src/app/shared/models/user';
 import { TodoService } from 'src/app/shared/services/todo.service';
+import { UserService } from 'src/app/shared/services/user.service';
+import { User } from 'src/app/shared/models/user';
+import { ITask } from 'src/app/shared/models/ITask';
 
 @Component({
   selector: 'app-todo-details',
   templateUrl: './todo-details.component.html',
   styleUrls: ['./todo-details.component.css']
 })
-export class TodoDetailsComponent  implements OnInit{
-
-  @Input() tasks: Todo[] = []; //  les taches dans le composant 
-  @Input() done: boolean = false;
-  createdByUser: User | undefined;
-  category!: string;
+export class TodoDetailsComponent implements OnInit {
+  tasks: ITask[] = [];
+  selectedCategoryId: string | null = null;
 
   constructor(
-    private _route: ActivatedRoute,
-    private _todoService: TodoService) { }
-  ngOnInit(): void {
-    console.log('TodoDetailsComponent ngOnInit called');
-    this._route.paramMap.subscribe((paramMap) => {
-      const category = paramMap.get('category');
-      console.log('Category:', category);
-      if (category) {
-        // Utilisez la catégorie pour charger les détails et les tâches correspondantes
-        // Par exemple, appelez une méthode de service pour charger les détails par catégorie
-        this.loadCategoryDetails(category);
+    private route: ActivatedRoute,
+    private todoService: TodoService,
+    private userService: UserService
+  ) { }
+  
+  async ngOnInit(): Promise<void> {
+    this.route.paramMap.subscribe(async params => {
+      const categoryId = params.get('category');
+      if (categoryId) {
+        this.selectedCategoryId = categoryId;
+        const loadedTasks = await this.todoService.getTasksByCategory(categoryId).toPromise();
+        if (loadedTasks) {
+          this.tasks = loadedTasks;
+          await this.assignUsersToTasks(this.tasks);
+        } else {
+          // Handle the case where tasks are not loaded correctly
+        }
       }
     });
   }
 
-  loadCategoryDetails(category: string): void {
-    // Utilisez le service pour charger les détails et les tâches de la catégorie
-    this._todoService.getTasksByCategory(category).subscribe(tasks => {
-      this.tasks = tasks;
+  async assignUsersToTasks(tasks: ITask[]): Promise<void> {
+    const promises = tasks.map(async (task) => {
+      if (task.userId) {
+        const user: User | undefined = await this.userService.findById(task.userId).toPromise();
+        if (user) {
+          task.user = user;
+        }
+      }
     });
 
-    this._todoService.getUserByCategory(category).subscribe(user => {
-      this.createdByUser = user;
-    });
+    await Promise.all(promises);
   }
-
-
-/*   deleteTodo(todoId: Todo): void
-  {
-    if (todoId) {
-      this._todoService
-        .delete(todoId)
-        .subscribe(()=> this.initTodo());
-    }
-  }
-
-  private initTodo(): void
-  {
-    this.tasks = this.tasks.filter( task=> task.id !== task.id );
-  }
-  getFilteredTasks(): Todo[] {
-    return this.tasks.filter(task => task.done === this.done);
-  } */
 }

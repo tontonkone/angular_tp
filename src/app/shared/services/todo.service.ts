@@ -5,6 +5,9 @@ import { HttpClient } from '@angular/common/http';
 import { Itodos } from '../models/Itodos';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
+import { ITask } from '../models/ITask';
+import { ICategory } from '../models/ICategory';
+import { UserService } from './user.service';
 /**
  * service de todo
  */
@@ -15,7 +18,7 @@ export class TodoService {
   private _baseUrl = environment.urlApi.categories;
   private _baseUserUrl = environment.urlApi.users
 
-  constructor(private _http: HttpClient) {}
+  constructor(private _http: HttpClient, private _userService : UserService) {}
 
   public findAll() {
     return this._http.get<Itodos[]>(this._baseUrl);
@@ -37,14 +40,21 @@ export class TodoService {
     return this._http.delete(`${this._baseUrl}/${todo.id}`);
   }
 
-  getTasksByCategory(category: string): Observable<Todo[]> {
+  getCategories(): Observable<ICategory[]> {
+    return this._http.get<ICategory[]>(`${this._baseUrl}`);
+  }
+  getTasksByCategory(category: string): Observable<ITask[]> {
     const url = `${this._baseUrl}/${category}/tasks`;
-    return this._http.get<Todo[]>(url);
+    return this._http.get<ITask[]>(url);
   }
 
   getUserByCategory(category: string): Observable<User> {
     const url = `${this._baseUrl}/${category}`; 
     return this._http.get<User>(url);
   }
+
+  //////////////////////////////////////
+
+
 
 }

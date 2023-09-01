@@ -41,14 +41,8 @@
     {
       "id": "user_id_1",
       "firstname": "John",
-      "lastname": "Doe",
+      "lastname": "Doewwww",
       "email": "john@example.com"
-    },
-    {
-      "id": "user_id_2",
-      "firstname": "Jane",
-      "lastname": "Doe",
-      "email": "jane@example.com"
     },
     {
       "id": "user_id_3",

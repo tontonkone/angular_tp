@@ -16,6 +16,7 @@ import { TodoListComponent } from './components/todos/todo-list/todo-list.compon
 import { TodosComponent } from './components/todos/todos.component';
 import { UsersComponent } from './components/users/users.component';
 import { UserDetailsComponent } from './components/users/user-details/user-details.component';
+import { CategorySelectorComponent } from './components/todos/category-selector/category-selector.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { UserDetailsComponent } from './components/users/user-details/user-detai
     TodoDetailsComponent,
     UsersComponent,
     UserDetailsComponent,
+    CategorySelectorComponent,
   ],
   imports: [
     BrowserModule,

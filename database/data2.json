@@ -1,0 +1,62 @@
+{
+  "categories": [
+    {
+      "id": "categorie_id_1",
+      "name": "Catégorie 1"
+    },
+    {
+      "id": "categorie_id_2",
+      "name": "Catégorie 2"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "task_id_1",
+      "categoryId": "categorie_id_1",
+      "description": "Tâche 1 de Catégorie 1",
+      "done": false,
+      "userId": "user_id_1"
+    },
+    {
+      "id": "task_id_2",
+      "categoryId": "categorie_id_1",
+      "description": "Tâche 2 de Catégorie 1",
+      "done": true,
+      "userId": "user_id_2"
+    },
+    {
+      "id": "task_id_3",
+      "categoryId": "categorie_id_2",
+      "description": "Tâche 1 de Catégorie 2",
+      "done": false,
+      "userId": "user_id_1"
+    },
+    {
+      "id": "task_id_4",
+      "categoryId": "categorie_id_2",
+      "description": "Tâche 2 de Catégorie 2",
+      "done": true,
+      "userId": "user_id_3"
+    }
+  ],
+  "users": [
+    {
+      "id": "user_id_1",
+      "firstname": "John",
+      "lastname": "Doewwww",
+      "email": "john@example.com"
+    },
+    {
+      "id": "user_id_2",
+      "firstname": "Alice",
+      "lastname": "Smith",
+      "email": "alice@example.com"
+    },
+    {
+      "id": "user_id_3",
+      "firstname": "Bob",
+      "lastname": "Johnson",
+      "email": "bob@example.com"
+    }
+  ]
+}
