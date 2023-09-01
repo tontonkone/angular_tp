@@ -4,6 +4,7 @@ import { TodoService } from 'src/app/shared/services/todo.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { User } from 'src/app/shared/models/user';
 import { ITask } from 'src/app/shared/models/ITask';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-todo-details',
@@ -15,13 +16,19 @@ export class TodoDetailsComponent implements OnInit {
   tasksTodo: ITask[] = [];
   tasksDone: ITask[] = [];
   selectedCategoryId: string | null = null;
+  currentUserId: string | null = null; // comment passer cette variable a todoform ?
 
   constructor(
     private route: ActivatedRoute,
     private todoService: TodoService,
-    private userService: UserService
+    private userService: UserService,
+    private _authService: AuthService
   ) { }
+
   async ngOnInit(): Promise<void> {
+    this._authService.login('user_id_2');
+    this.currentUserId = this._authService.getCurrentUserId();
+
     this.route.paramMap.subscribe(async params => {
       const categoryId = params.get('category');
       if (categoryId) {
@@ -31,17 +38,14 @@ export class TodoDetailsComponent implements OnInit {
         if (loadedTasks) {
           this.tasks = loadedTasks;
           await this.assignUsersToTasks(this.tasks);
+          this.tasks = loadedTasks.filter(task => task.userId === this.currentUserId);
           this.tasksTodo = this.tasks.filter(task => !task.done);
           this.tasksDone = this.tasks.filter(task => task.done);
-          console.log('Tasks Todo:', this.tasksTodo); // Vérifiez si les tâches à faire sont correctes ici
-          console.log('Tasks Done:', this.tasksDone); // Vérifiez si les tâches terminées sont correctes ici
         }
       }
     });
     this.loadTasks();
   }
-
-
 
   loadTasks(): void {
     this.todoService.getTasks().subscribe((tasks) => {

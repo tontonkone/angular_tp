@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ICategory } from 'src/app/shared/models/ICategory';
 import { User } from 'src/app/shared/models/user';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { TodoService } from 'src/app/shared/services/todo.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
@@ -15,17 +16,21 @@ export class TodoFormComponent {
   taskForm: FormGroup;
   users: User[] = [];
   categories: ICategory[] = [];
+  currentUserId: string | null = null;
 
   constructor(
     private fb: FormBuilder, 
     private _todoService: TodoService, 
-    private _userService: UserService) {
+    private _userService: UserService,
+    private _authService: AuthService) {
     this.taskForm = this.fb.group({
       description: ['', Validators.required],
       done: [false],
-      userId: ['', Validators.required],
-      categoryId: ['', Validators.required]
+      categoryId: ['', Validators.required],
+      userId: ['', Validators.required]
     });
+    this.currentUserId = this._authService.getCurrentUserId();
+    console.log(this.currentUserId)
   }
   ngOnInit(): void {
     // Récupérer la liste des utilisateurs depuis le backend ou un service
@@ -44,6 +49,8 @@ export class TodoFormComponent {
   }
 
   onSubmit(): void {
+    console.log(this.currentUserId)
+    console.log("cc ")
     if (this.taskForm.valid) {
       const newTask = this.taskForm.value;
 

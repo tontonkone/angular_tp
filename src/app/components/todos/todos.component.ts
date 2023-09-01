@@ -13,6 +13,7 @@ import { TodoService } from 'src/app/shared/services/todo.service';
   categories: any[] = [];
   selectedUserId: string = '';
   selectedCategory: string | undefined;
+  currentUserId: string | null = null;
 
   todos: Todo[] = [];
   tasks: ITask[] = [];
