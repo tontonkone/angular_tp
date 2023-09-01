@@ -17,6 +17,7 @@ import { UserService } from './user.service';
 export class TodoService {
   private _baseUrl = environment.urlApi.categories;
   private _baseUserUrl = environment.urlApi.users
+  private _baseTodoUrl = environment.urlApi.tasks;
 
   constructor(private _http: HttpClient, private _userService : UserService) {}
 
@@ -28,8 +29,8 @@ export class TodoService {
     return this._http.get(`${this._baseUrl}/${id}`);
   }
 
-  public create(todo: Todo) {
-    return this._http.post(this._baseUrl, todo);
+  public create(todo: ITask) {
+    return this._http.post(this._baseTodoUrl, todo);
   }
 
   public update(updated: Todo) {
@@ -52,9 +53,11 @@ export class TodoService {
     const url = `${this._baseUrl}/${category}`; 
     return this._http.get<User>(url);
   }
+  getTasks(): Observable<ITask[]> {
+    const url = `${this._baseTodoUrl}`;
+    return this._http.get<ITask[]>(url);
+  }
 
-  //////////////////////////////////////
 
-
-
+  /////////////////////////////////////
 }

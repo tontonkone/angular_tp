@@ -1,0 +1,27 @@
+
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+<div>
+    <label for="description">Description :</label>
+    <input type="text" id="description" formControlName="description" />
+</div>
+<div>
+    <label for="done">Terminée :</label>
+    <input type="checkbox" id="done" formControlName="done" />
+</div>
+<div>
+    <label for="categoryId">Catégorie</label>
+    <select formControlName="categoryId" id="categoryId" class="form-control">
+        <option value="" disabled>Select a category</option>
+        <option *ngFor="let category of categories" [value]="category.id">
+            {{ category.name }}
+        </option>
+    </select>
+</div>
+<div>
+    <label for="userId">Utilisateur :</label>
+    <select id="userId" formControlName="userId">
+        <option *ngFor="let user of users" [value]="user.id">{{ user.firstname }} {{ user.lastname }}</option>
+    </select>
+</div>
+<button type="submit">Créer la tâche</button>
+</form>

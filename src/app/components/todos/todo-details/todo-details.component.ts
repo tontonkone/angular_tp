@@ -12,6 +12,8 @@ import { ITask } from 'src/app/shared/models/ITask';
 })
 export class TodoDetailsComponent implements OnInit {
   tasks: ITask[] = [];
+  tasksTodo: ITask[] = [];
+  tasksDone: ITask[] = [];
   selectedCategoryId: string | null = null;
 
   constructor(
@@ -19,33 +21,48 @@ export class TodoDetailsComponent implements OnInit {
     private todoService: TodoService,
     private userService: UserService
   ) { }
-  
   async ngOnInit(): Promise<void> {
     this.route.paramMap.subscribe(async params => {
       const categoryId = params.get('category');
       if (categoryId) {
         this.selectedCategoryId = categoryId;
         const loadedTasks = await this.todoService.getTasksByCategory(categoryId).toPromise();
+        console.log('Loaded tasks:', loadedTasks); // Vérifiez si les données sont correctes ici
         if (loadedTasks) {
           this.tasks = loadedTasks;
           await this.assignUsersToTasks(this.tasks);
-        } else {
-          // Handle the case where tasks are not loaded correctly
+          this.tasksTodo = this.tasks.filter(task => !task.done);
+          this.tasksDone = this.tasks.filter(task => task.done);
+          console.log('Tasks Todo:', this.tasksTodo); // Vérifiez si les tâches à faire sont correctes ici
+          console.log('Tasks Done:', this.tasksDone); // Vérifiez si les tâches terminées sont correctes ici
         }
       }
     });
+    this.loadTasks();
   }
 
-  async assignUsersToTasks(tasks: ITask[]): Promise<void> {
-    const promises = tasks.map(async (task) => {
-      if (task.userId) {
-        const user: User | undefined = await this.userService.findById(task.userId).toPromise();
-        if (user) {
-          task.user = user;
-        }
-      }
+
+
+  loadTasks(): void {
+    this.todoService.getTasks().subscribe((tasks) => {
+      console.log("taches get =>",tasks);
+      this.tasks = tasks;
+      this.tasksTodo = this.tasks.filter((task) => !task.done);
+      this.tasksDone = this.tasks.filter((task) => task.done);
     });
-
-    await Promise.all(promises);
   }
+
+async assignUsersToTasks(tasks: ITask[]): Promise<void> {
+  const promises = tasks.map(async (task) => {
+    if (task.userId) {
+      const user: User | undefined = await this.userService.findById(task.userId).toPromise();
+      if (user) {
+        task.user = user;
+      }
+    }
+  });
+
+  await Promise.all(promises);
+}
+
 }

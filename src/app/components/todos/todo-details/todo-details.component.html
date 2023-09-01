@@ -1,6 +1,13 @@
 <h2>Tâches de la catégorie "{{ selectedCategoryId }}"</h2>
+<h3> Tâches à faire </h3>
 <ul>
-    <li *ngFor="let task of tasks">
-        {{ task.description }} (Créée par {{ task.user.firstname }})
+    <li *ngFor="let task of tasksTodo">
+        {{task.description}} Créée par = {{ task.user.firstname }}
+    </li>
+</ul>
+<h3> Tâches faites </h3>
+<ul>
+    <li *ngFor="let task of tasksDone">
+        {{task.description}} Créée par = {{ task.user.firstname }} -------
     </li>
 </ul>

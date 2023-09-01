@@ -1,7 +1,9 @@
+
 <h1>Liste des tâches par catégorie</h1>
 <ul>
     <li *ngFor="let category of categories">
         <a [routerLink]="['/todos/categories', category.id]">{{ category.name }}</a>
     </li>
 </ul>
+<app-todo-form></app-todo-form>
 <router-outlet></router-outlet>

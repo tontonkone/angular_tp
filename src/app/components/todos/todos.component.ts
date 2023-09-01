@@ -63,15 +63,9 @@ import { TodoService } from 'src/app/shared/services/todo.service';
     }
   }
 
-
   showCategoryTodo(category: string | undefined): void {
     this.selectedCategory = category;
   }
-
-  /* get categories(){
-    return [...new Set(this.todos.map(todo => todo.categorie))];
-  } */
-
 
   //Appel du service pour récupérer en base toutes les taĉhes
   //enregistrées
@@ -83,7 +77,7 @@ import { TodoService } from 'src/app/shared/services/todo.service';
       });
   }
 
-  createOrUpdateTodo() {
+/*   createOrUpdateTodo() {
     if (!this.todo.id) {
       this._todoService
         .create(this.todo)
@@ -107,7 +101,7 @@ import { TodoService } from 'src/app/shared/services/todo.service';
       done: false,
       editable: false
     };
-  }
+  } */
 
 }
 

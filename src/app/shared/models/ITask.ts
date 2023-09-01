@@ -6,4 +6,5 @@ export interface ITask{
     done: boolean;
     userId: string;
     user: User;
+    categoryId: string;
 }

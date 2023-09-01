@@ -28,7 +28,7 @@
       "id": "task_id_3",
       "categoryId": "categorie_id_2",
       "description": "Tâche 1 de Catégorie 2",
-      "done": false,
+      "done": true,
       "userId": "user_id_1"
     },
     {
@@ -37,6 +37,13 @@
       "description": "Tâche 2 de Catégorie 2",
       "done": true,
       "userId": "user_id_3"
+    },
+    {
+      "description": "test123",
+      "done": true,
+      "userId": "user_id_3",
+      "categoryId": "categorie_id_2",
+      "id": "TRRMGnb"
     }
   ],
   "users": [
