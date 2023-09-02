@@ -9,7 +9,6 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/home/home.component';
 import { PresentationComponent } from './components/presentation/presentation.component';
-import { TodoDetailsComponent } from './components/todos/todo-details/todo-details.component';
 import { TodoFormComponent } from './components/todos/todo-form/todo-form.component';
 import { TodoItemComponent } from './components/todos/todo-item/todo-item.component';
 import { TodoListComponent } from './components/todos/todo-list/todo-list.component';
@@ -18,6 +17,7 @@ import { UsersComponent } from './components/users/users.component';
 import { UserDetailsComponent } from './components/users/user-details/user-details.component';
 import { CategorySelectorComponent } from './components/todos/category-selector/category-selector.component';
 import { LoginComponent } from './components/login/login.component';
+import { TodoDetailsComponent } from './components/todos/todo-details/todo-details.component';
 
 
 @NgModule({
@@ -32,11 +32,11 @@ import { LoginComponent } from './components/login/login.component';
     TodoListComponent,
     TodoItemComponent,
     TodoFormComponent,
-    TodoDetailsComponent,
     UsersComponent,
     UserDetailsComponent,
     CategorySelectorComponent,
     LoginComponent,
+    TodoDetailsComponent
   ],
   imports: [
     BrowserModule,
