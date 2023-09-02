@@ -57,7 +57,9 @@ export class TodoService {
     const url = `${this._baseTodoUrl}`;
     return this._http.get<ITask[]>(url);
   }
-
-
+  getCategoryNameById(categoryId: string): Observable<ICategory> {
+    const url = `${this._baseUrl}/${categoryId}`;
+    return this._http.get<ICategory>(url);
+  }
   /////////////////////////////////////
 }

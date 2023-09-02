@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ICategory } from 'src/app/shared/models/ICategory';
 import { User } from 'src/app/shared/models/user';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { EmitterService } from 'src/app/shared/services/emetter.service';
 import { TodoService } from 'src/app/shared/services/todo.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
@@ -22,7 +23,8 @@ export class TodoFormComponent {
     private fb: FormBuilder, 
     private _todoService: TodoService, 
     private _userService: UserService,
-    private _authService: AuthService) {
+    private _authService: AuthService,
+    private _emetterService: EmitterService) {
     this.taskForm = this.fb.group({
       description: ['', Validators.required],
       done: [false],
@@ -66,6 +68,7 @@ export class TodoFormComponent {
         }
       );
     }
+    this._emetterService.notifyTaskCreated()
   }
 
 

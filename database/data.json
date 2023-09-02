@@ -1,40 +1,48 @@
 {
   "categories": [
     {
-      "id": "categorie_id_1",
-      "name": "Catégorie 1"
+      "id": "cat001",
+      "name": "Loisirs"
     },
     {
-      "id": "categorie_id_2",
-      "name": "Catégorie 2"
+      "id": "cat002",
+      "name": "Travail"
+    },
+    {
+      "id": "cat003",
+      "name": "Personnel"
+    },
+    {
+      "id": "cat004",
+      "name": "Éducation"
     }
   ],
   "tasks": [
     {
       "id": "task_id_1",
-      "categoryId": "categorie_id_1",
-      "description": "Tâche 1 de Catégorie 1",
+      "categoryId": "cat001",
+      "description": "faire mes devoir",
       "done": false,
       "userId": "user_id_1"
     },
     {
       "id": "task_id_2",
-      "categoryId": "categorie_id_1",
-      "description": "Tâche 2 de Catégorie 1",
+      "categoryId": "cat001",
+      "description": "terminer ce qu'il y à faire",
       "done": true,
       "userId": "user_id_2"
     },
     {
       "id": "task_id_3",
-      "categoryId": "categorie_id_2",
+      "categoryId": "cat002",
       "description": "Tâche 1 de Catégorie 2",
       "done": true,
       "userId": "Q5_67GM"
     },
     {
       "id": "task_id_4",
-      "categoryId": "categorie_id_2",
-      "description": "Tâche 2 de Catégorie 2",
+      "categoryId": "cat003",
+      "description": "Tâche 2 de Catégorie 3",
       "done": true,
       "userId": "Q5_67GM"
     },
@@ -42,47 +50,64 @@
       "description": "test123",
       "done": true,
       "userId": "user_id_3",
-      "categoryId": "categorie_id_2",
+      "categoryId": "cat001",
       "id": "TRRMGnb"
     },
     {
       "description": "manger ",
       "done": true,
       "userId": "user_id_2",
-      "categoryId": "categorie_id_1",
+      "categoryId": "cat001",
       "id": "pYzapFH"
-    },
-    {
-      "description": "ssss",
-      "done": true,
-      "categoryId": "categorie_id_1",
-      "id": "03td-Lg"
-    },
-    {
-      "description": "ggggggg",
-      "done": true,
-      "categoryId": "categorie_id_1",
-      "id": "_ryy6md"
-    },
-    {
-      "description": "eee",
-      "done": true,
-      "categoryId": "categorie_id_1",
-      "id": "7XYo9x9"
     },
     {
       "description": "dddsss",
       "done": true,
-      "categoryId": "categorie_id_1",
+      "categoryId": "cat001",
       "userId": "Q5_67GM",
       "id": "1XJcoWi"
     },
     {
       "description": "comment tu vas",
       "done": true,
-      "categoryId": "categorie_id_2",
+      "categoryId": "cat003",
       "userId": "Q5_67GM",
       "id": "7Gi2RIT"
+    },
+    {
+      "description": "tache de travaille a faire bientot",
+      "done": false,
+      "categoryId": "cat002",
+      "userId": "user_id_3",
+      "id": "6QmVnBS"
+    },
+    {
+      "description": "a faire rapidement ",
+      "done": true,
+      "categoryId": "cat002",
+      "userId": "user_id_3",
+      "id": "bqVz-r0"
+    },
+    {
+      "description": "nouveau tache de boulot",
+      "done": true,
+      "categoryId": "cat002",
+      "userId": "user_id_3",
+      "id": "T5797Y8"
+    },
+    {
+      "description": "qu'esejeje ",
+      "done": true,
+      "categoryId": "cat004",
+      "userId": "user_id_3",
+      "id": "wXaClui"
+    },
+    {
+      "description": "boob",
+      "done": false,
+      "categoryId": "cat002",
+      "userId": "user_id_3",
+      "id": "sXQKbeR"
     }
   ],
   "users": [

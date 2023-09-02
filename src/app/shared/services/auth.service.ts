@@ -33,7 +33,6 @@ export class AuthService {
         }
       }
 
-      // Si l'utilisateur est trouvé et que le mot de passe correspond, authentifiez l'utilisateur
       return false; // Ajoutez cette ligne pour renvoyer une valeur par défaut si aucun chemin précédent n'est pris
 
     } catch (error) {

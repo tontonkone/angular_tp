@@ -5,6 +5,7 @@ import { UserService } from 'src/app/shared/services/user.service';
 import { User } from 'src/app/shared/models/user';
 import { ITask } from 'src/app/shared/models/ITask';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { EmitterService } from 'src/app/shared/services/emetter.service';
 
 @Component({
   selector: 'app-todo-details',
@@ -17,23 +18,27 @@ export class TodoDetailsComponent implements OnInit {
   tasksDone: ITask[] = [];
   selectedCategoryId: string | null = null;
   currentUserId: string | null = null;
+  categoryName: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
-    private todoService: TodoService,
-    private userService: UserService,
+    private _todoService: TodoService,
+    private _userService: UserService,
+    private _emetterService: EmitterService,
     private _authService: AuthService
   ) { }
 
   ngOnInit(): void {
-
     this.currentUserId = sessionStorage.getItem('currentUserId');
     this.route.paramMap.subscribe(params => {
-      const categoryId = params.get('category');
+      const categoryId = params.get('category'); // je veux recuperer le nom du category ?
       if (categoryId) {
         this.selectedCategoryId = categoryId;
-        this.todoService.getTasksByCategory(categoryId).subscribe(loadedTasks => {
-          console.log('Loaded tasks:', loadedTasks); // Vérifiez si les données sont correctes ici
+        this._todoService.getCategoryNameById(categoryId).subscribe(categoryName => {
+          this.categoryName = categoryName.name;
+        });
+        this._todoService.getTasksByCategory(categoryId).subscribe(loadedTasks => {
+          console.log('Loaded tasks:', loadedTasks);
           if (loadedTasks) {
             this.tasks = loadedTasks;
             this.assignUsersToTasks(this.tasks);
@@ -45,10 +50,11 @@ export class TodoDetailsComponent implements OnInit {
       }
     });
     this.loadTasks();
+    
   }
 
   loadTasks(): void {
-    this.todoService.getTasks().subscribe(tasks => {
+    this._todoService.getTasks().subscribe(tasks => {
       console.log("taches get =>", tasks);
       this.tasks = tasks;
       this.tasksTodo = this.tasks.filter(task => !task.done);
@@ -59,7 +65,7 @@ export class TodoDetailsComponent implements OnInit {
   assignUsersToTasks(tasks: ITask[]): void {
     tasks.forEach(async (task) => {
       if (task.userId) {
-        const user = await this.userService.findById(task.userId).toPromise();
+        const user = await this._userService.findById(task.userId).toPromise();
         if (user) {
           task.user = user;
         }

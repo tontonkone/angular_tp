@@ -1,9 +1,9 @@
 <nav>
   <div routerLink="/home">Accueil</div>
   <div routerLink="/presentation">Présentation</div>
-  <div routerLink="/todos">Liste des tâches</div>
   <div routerLink="/users">Liste des utilisateurs</div>
   <div routerLink="/login">Login</div>
   <div routerLink="/users/ghjklkjhg">Détails d'un utilisateur</div>
   <div routerLink="/contact">Contact</div>
+  <button *ngIf="isUserLoggedIn()" (click)="logout()">Déconnexion</button>
 </nav>
