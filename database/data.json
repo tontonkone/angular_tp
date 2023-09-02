@@ -29,14 +29,14 @@
       "categoryId": "categorie_id_2",
       "description": "Tâche 1 de Catégorie 2",
       "done": true,
-      "userId": "user_id_1"
+      "userId": "Q5_67GM"
     },
     {
       "id": "task_id_4",
       "categoryId": "categorie_id_2",
       "description": "Tâche 2 de Catégorie 2",
       "done": true,
-      "userId": "user_id_3"
+      "userId": "Q5_67GM"
     },
     {
       "description": "test123",
@@ -57,6 +57,32 @@
       "done": true,
       "categoryId": "categorie_id_1",
       "id": "03td-Lg"
+    },
+    {
+      "description": "ggggggg",
+      "done": true,
+      "categoryId": "categorie_id_1",
+      "id": "_ryy6md"
+    },
+    {
+      "description": "eee",
+      "done": true,
+      "categoryId": "categorie_id_1",
+      "id": "7XYo9x9"
+    },
+    {
+      "description": "dddsss",
+      "done": true,
+      "categoryId": "categorie_id_1",
+      "userId": "Q5_67GM",
+      "id": "1XJcoWi"
+    },
+    {
+      "description": "comment tu vas",
+      "done": true,
+      "categoryId": "categorie_id_2",
+      "userId": "Q5_67GM",
+      "id": "7Gi2RIT"
     }
   ],
   "users": [
@@ -64,19 +90,29 @@
       "id": "user_id_1",
       "firstname": "John",
       "lastname": "Doewwww",
-      "email": "john@example.com"
+      "email": "john@example.com",
+      "password": "password123"
     },
     {
       "id": "user_id_2",
       "firstname": "Alice",
       "lastname": "Smith",
-      "email": "alice@example.com"
+      "email": "alice@example.com",
+      "password": "password123"
     },
     {
       "id": "user_id_3",
       "firstname": "Bob",
       "lastname": "Johnson",
-      "email": "bob@example.com"
+      "email": "bob@example.com",
+      "password": "password123"
+    },
+    {
+      "lastname": "dada",
+      "firstname": "dodo",
+      "email": "dada@d.c",
+      "password": "123",
+      "id": "Q5_67GM"
     }
   ]
 }

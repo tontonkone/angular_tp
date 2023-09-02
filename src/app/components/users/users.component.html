@@ -21,6 +21,13 @@
     autocomplete="off"
     [(ngModel)]="user.email"
     placeholder="Email">
+
+  <input
+    type="password"
+    name="password"
+    [(ngModel)]="user.password"
+    placeholder="password">
+    
   <button type="submit">Go!</button>
   <button (click)="reInitUser()" type="reset">Effacer</button>
 </form>

@@ -16,7 +16,7 @@ export class TodoDetailsComponent implements OnInit {
   tasksTodo: ITask[] = [];
   tasksDone: ITask[] = [];
   selectedCategoryId: string | null = null;
-  currentUserId: string | null = null; // comment passer cette variable a todoform ?
+  currentUserId: string | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,48 +25,45 @@ export class TodoDetailsComponent implements OnInit {
     private _authService: AuthService
   ) { }
 
-  async ngOnInit(): Promise<void> {
-    this._authService.login('user_id_2');
-    this.currentUserId = this._authService.getCurrentUserId();
+  ngOnInit(): void {
 
-    this.route.paramMap.subscribe(async params => {
+    this.currentUserId = sessionStorage.getItem('currentUserId');
+    this.route.paramMap.subscribe(params => {
       const categoryId = params.get('category');
       if (categoryId) {
         this.selectedCategoryId = categoryId;
-        const loadedTasks = await this.todoService.getTasksByCategory(categoryId).toPromise();
-        console.log('Loaded tasks:', loadedTasks); // Vérifiez si les données sont correctes ici
-        if (loadedTasks) {
-          this.tasks = loadedTasks;
-          await this.assignUsersToTasks(this.tasks);
-          this.tasks = loadedTasks.filter(task => task.userId === this.currentUserId);
-          this.tasksTodo = this.tasks.filter(task => !task.done);
-          this.tasksDone = this.tasks.filter(task => task.done);
-        }
+        this.todoService.getTasksByCategory(categoryId).subscribe(loadedTasks => {
+          console.log('Loaded tasks:', loadedTasks); // Vérifiez si les données sont correctes ici
+          if (loadedTasks) {
+            this.tasks = loadedTasks;
+            this.assignUsersToTasks(this.tasks);
+            this.tasks = loadedTasks.filter(task => task.userId === this.currentUserId);
+            this.tasksTodo = this.tasks.filter(task => !task.done);
+            this.tasksDone = this.tasks.filter(task => task.done);
+          }
+        });
       }
     });
     this.loadTasks();
   }
 
   loadTasks(): void {
-    this.todoService.getTasks().subscribe((tasks) => {
-      console.log("taches get =>",tasks);
+    this.todoService.getTasks().subscribe(tasks => {
+      console.log("taches get =>", tasks);
       this.tasks = tasks;
-      this.tasksTodo = this.tasks.filter((task) => !task.done);
-      this.tasksDone = this.tasks.filter((task) => task.done);
+      this.tasksTodo = this.tasks.filter(task => !task.done);
+      this.tasksDone = this.tasks.filter(task => task.done);
     });
   }
 
-async assignUsersToTasks(tasks: ITask[]): Promise<void> {
-  const promises = tasks.map(async (task) => {
-    if (task.userId) {
-      const user: User | undefined = await this.userService.findById(task.userId).toPromise();
-      if (user) {
-        task.user = user;
+  assignUsersToTasks(tasks: ITask[]): void {
+    tasks.forEach(async (task) => {
+      if (task.userId) {
+        const user = await this.userService.findById(task.userId).toPromise();
+        if (user) {
+          task.user = user;
+        }
       }
-    }
-  });
-
-  await Promise.all(promises);
-}
-
+    });
+  }
 }

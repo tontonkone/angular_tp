@@ -17,6 +17,7 @@ import { TodosComponent } from './components/todos/todos.component';
 import { UsersComponent } from './components/users/users.component';
 import { UserDetailsComponent } from './components/users/user-details/user-details.component';
 import { CategorySelectorComponent } from './components/todos/category-selector/category-selector.component';
+import { LoginComponent } from './components/login/login.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { CategorySelectorComponent } from './components/todos/category-selector/
     UsersComponent,
     UserDetailsComponent,
     CategorySelectorComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

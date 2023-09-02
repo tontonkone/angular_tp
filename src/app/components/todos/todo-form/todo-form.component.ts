@@ -26,13 +26,14 @@ export class TodoFormComponent {
     this.taskForm = this.fb.group({
       description: ['', Validators.required],
       done: [false],
-      categoryId: ['', Validators.required],
-      userId: ['', Validators.required]
+      categoryId: ['', Validators.required]
+      
     });
     this.currentUserId = this._authService.getCurrentUserId();
     console.log(this.currentUserId)
   }
   ngOnInit(): void {
+    this.currentUserId = sessionStorage.getItem('currentUserId');
     // Récupérer la liste des utilisateurs depuis le backend ou un service
     this._userService.findAll().subscribe(
       (users) => {
@@ -53,12 +54,11 @@ export class TodoFormComponent {
     console.log("cc ")
     if (this.taskForm.valid) {
       const newTask = this.taskForm.value;
-
-      // Envoyer la demande POST pour créer la tâche
+      newTask.userId = this.currentUserId;
+      console.log(newTask)
       this._todoService.create(newTask).subscribe(
         (response) => {
           console.log('Tâche créée avec succès :', response);
-          // Réinitialiser le formulaire après la création réussie
           this.taskForm.reset();
         },
         (error) => {

@@ -7,12 +7,14 @@ import { TodosComponent } from './components/todos/todos.component';
 import { UsersComponent } from './components/users/users.component';
 import { UserDetailsComponent } from './components/users/user-details/user-details.component';
 import { TodoDetailsComponent } from './components/todos/todo-details/todo-details.component';
+import { LoginComponent } from './components/login/login.component';
 
 // /home/one/two
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'presentation', component: PresentationComponent },
+  {path: 'login', component: LoginComponent},
   { path: 'todos', 
     component: TodosComponent,
     children: [
